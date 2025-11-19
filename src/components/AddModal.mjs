@@ -104,6 +104,7 @@ export class AddModal {
                 new Role(roleValue[0],roleValue[1]),
                 formData.get("photo").trim(),
                 formData.get("email").trim(),
+                null,
                 formData.get("phone").trim(),
                 []
             );

@@ -1,9 +1,9 @@
 export class Room {
-    constructor(id,name,allowedIds,maxPlaces,members) {
+    constructor(id,name,allowedIds,maxPlaces,staffCount) {
         this.id = id;
         this.allowedIds = allowedIds;
         this.name = name;
         this.maxPlaces = maxPlaces;
-        this.members = members;
+        this.staffCount = staffCount;
     }
 }

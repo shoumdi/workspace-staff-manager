@@ -1,5 +1,4 @@
-export const STORAGE_KEY = "mystorage";
-export const ID_KEY = "myId";
+export const STORAGE_KEY = "staffManagerKey";
 
 export const DELAY = 500;
 
