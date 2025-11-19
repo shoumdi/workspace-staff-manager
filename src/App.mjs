@@ -1,5 +1,6 @@
 import { AddModal } from "./components/AddModal.mjs"
 import { AsigningModal } from "./components/AsigningModal.mjs";
+import { DetailsModal } from "./components/DetailsModal.mjs";
 import { RoomCard } from "./components/RoomCard.mjs";
 import { StaffCard } from "./components/StaffCard.mjs";
 import { service } from "./services/Service.mjs";
@@ -47,12 +48,18 @@ document.getElementById("plan").addEventListener("click", e => {
 
 
 document.getElementById("unassignedList").addEventListener("click", e => {
-    const target = e.target.closest("button");
-
-    switch (target.getAttribute("id")) {
+    if(e.target.closest("button")){
+        e.stopPropagation();
+        switch (target?.getAttribute("id")) {
         case "editStaff": alert("not implemented"); break;
         case "deleteStaff": deleteStaff(target.closest("article")); break;
     }
+    } else if(e.target.closest("article")){        
+        const staff = service.getStaffById(e.target.closest("article").getAttribute("staffId"));        
+        const modal = new DetailsModal(staff);
+        modal.show();
+    }
+    
 })
 
 
