@@ -10,7 +10,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="h-screen">
-    <main class="h-full bg-neutral-200 grid grid-cols-12 overflow-hidden">
+    <main class="h-full bg-neutral-200 md:grid grid-cols-12 overflow-hidden">
         <aside class="m-3 col-span-3 p-4 bg-neutral-50 rounded-lg overflow-y-scroll">
             <h2 class="font-lg font-semibold">Staff Members (Unassigned)</h2>
             <button id="add-worker" class="w-full mt-4 py-2 px-4 bg-green-500 text-white rounded-lg">Add new worker</button>
@@ -19,40 +19,40 @@
 
 
         <!-- workspace  -->
-        <div id="plan" class="h-full col-span-9 bg-[url(../public/assets/images/plan.jpg)] bg-contain bg-no-repeat
-            p-2 size-full grid grid-cols-12 grid-rows-12 gap-2
+        <div id="plan" class="h-full col-span-9 md:bg-[url(../public/assets/images/plan.jpg)] bg-contain bg-no-repeat
+            p-2 size-full md:grid grid-cols-12 grid-rows-12 gap-2
         ">
 
-            <div id="0" class="me-9 col-span-5 row-span-4 bg-green-500/30 flex flex-col justify-center items-center">
+            <div id="0" class="p-2 md:me-9 col-span-5 row-span-4 bg-red-500/30 flex flex-col justify-center items-center">
                     <ul class="size-full flex flex-wrap gap-2 content-center justify-center items-center"></ul>
                     <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
                 </div>
                 
-                <div id="1" class="me-9 col-span-5 row-start-5 row-span-8 bg-red-500/30 flex flex-col justify-center items-center">
+                <div id="1" class="md:me-9 col-span-5 row-start-5 row-span-8 bg-red-500/30 flex flex-col justify-center items-center">
                     <ul class="size-full flex flex-wrap gap-2 content-center justify-center items-center"></ul>
 
                     <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
                 </div>
 
-                <div class="ms-10 col-start-7 col-span-6  row-span-4 flex gap-2">
-                    <div id="2" class="size-full bg-indigo-500/30 flex flex-col justify-center items-center">
-                        <ul class="size-full flex flex-wrap gap-2 content-center justify-center items-center"></ul>
+                <div class="md:ms-10 col-start-7 col-span-6  row-span-4 flex gap-2">
+                    <div id="2" class="size-full bg-red-500/30 flex flex-col justify-center items-center">
+                        <ul class="size-full flex flex-col md:flex-row flex-wrap gap-2 content-center justify-center items-center"></ul>
 
                         <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
                     </div>
-                    <div id="3" class="size-full bg-cyan-500/30 flex flex-col justify-center items-center">
-                        <ul class="size-full flex flex-wrap gap-2 content-center justify-center items-center"></ul>
+                    <div id="3" class="size-full bg-red-500/30 flex flex-col justify-center items-center">
+                        <ul class="size-full flex flex-col md:flex-row flex-wrap gap-2 content-center justify-center items-center"></ul>
 
                         <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
                     </div>
                 </div>
 
                 <div class="ms-10 col-start-7 col-span-6  row-start-9 row-span-4 flex gap-2">
-                    <div id="4" class="ms-3 size-full bg-indigo-500/30 flex flex-col justify-center items-center">
+                    <div id="4" class="ms-3 size-full bg-red-500/30 flex flex-col justify-center items-center">
                         <ul class="size-full flex flex-wrap gap-2 content-center justify-center items-center"></ul>
                         <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
                     </div>
-                    <div id="5" class="size-full bg-cyan-500/30 flex flex-col justify-center items-center">
+                    <div id="5" class="size-full bg-red-500/30 flex flex-col justify-center items-center">
                         <ul class="size-full flex flex-wrap gap-2 content-center justify-center items-center"></ul>
                         <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
                     </div>

@@ -23,6 +23,7 @@ export class Repository {
     getStaffs(){
         return this.data.staffs;
     }
+    
     getRoomById(id){        
         return this.data.rooms.find(r=>r.id === id);
     }
@@ -40,19 +41,14 @@ export class Repository {
         return this.data.staffs.find(s=>s.id === id);
     }
 
-    updateRooms(room){
-        this.data.rooms.find(r=>r.id===room.id).members = room.members;
-    }
-
-    updateStaff(staff){
+    upsert(staff){
         const index = this.data.staffs.findIndex(s=>s.id===staff.id);
         if(index !==-1) this.data.staffs.splice(index,1,staff);
-
-    }
-
-    setNewStaff(staff){
-        this.data.staffs.push(staff);
-        this.data.uid++;
+        else {
+            this.data.staffs.push(staff);
+            this.data.uid++;
+        }
+        this.saveDataToLocalStorage();
     }
 
 

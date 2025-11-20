@@ -8,6 +8,10 @@ class Service{
     getRoomById(id){
         return repository.getRoomById(id);
     }
+
+    isRoomEmpty(id){
+        return this.repo.getStaffs().filter(s=> s.room === id).length === 0;
+    }
     getUnassignedStaffs(){
         return this.repo.getStaffs().filter(s=>s.room===null);
     }
@@ -25,7 +29,7 @@ class Service{
         const staff = this.repo.getStaffs().find(s=>s.id===id);
         if(!staff) return null;
         staff.room = null;
-        this.repo.updateStaff(staff);
+        this.repo.upsert(staff);
         return staff;
     }
     getStaffById(id){
@@ -34,8 +38,8 @@ class Service{
     getCurrentId(){
         return this.repo.getCurrentId();
     }
-    addNewStaff(staff){
-        this.repo.setNewStaff(staff);
+    upsert(staff){
+        this.repo.upsert(staff);
     }
 
     deleteStaff(id){
@@ -48,18 +52,9 @@ class Service{
         if(room.staffCount === room.maxPlaces) return 0;                
         if(room.allowedIds.findIndex(id=>id===staff.role.id)===-1) return -1;
         staff.room = room.id;
-        this.repo.updateStaff(staff);
+        this.repo.upsert(staff);
         return 1;
     }
-
-    removeStaffFrom(){
-        
-    }
-
-    editStaff(){
-        
-    }
-
     saveDataToLocalStorage(){
         this.repo.saveDataToLocalStorage();
     }

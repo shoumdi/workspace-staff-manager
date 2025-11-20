@@ -6,8 +6,8 @@ import { debounce, isImgUrl, validate } from "../utils/Helper.mjs";
 import { ExperienceCard } from "./ExperienceCard.mjs";
 
 export class AddModal {
-    constructor(workerId) {
-        this.workerId =  workerId;
+    constructor(staff) {
+        this.staff =  staff;
         this.debouncer = debounce( (element)=>{this.#validateInput(element)});
         this.validInput = 0;
     }
@@ -64,7 +64,7 @@ export class AddModal {
 
                         
                         <fieldset>Experiences</fieldset>
-                        <div id="experienceList" class="flex flex-col gap-2">${ExperienceCard(false)}</div>
+                        <div id="experienceList" class="flex flex-col gap-2"></div>
                         
                         <input name="addExp" type="button" value="Add Experience" class="w-full py-2 px-4 bg-yellow-600 text-white rounded-lg">
                         <input name="submit" type="submit" value="add worker" class="mt-6 w-full px-4 py-2 bg-black text-white rounded-lg">
@@ -74,6 +74,8 @@ export class AddModal {
             </div>
         `
         document.body.insertAdjacentHTML("beforeend",view);
+
+        this.#initializeForm();
 
         document.forms["add-worker-form"].addEventListener("input",e=>{
             this.debouncer(e.target)
@@ -98,16 +100,15 @@ export class AddModal {
             
             
             const roleValue = formData.get("role").split(" ");
-            let staff = new Staff(
-                this.workerId,
-                formData.get("name").trim(),
-                new Role(roleValue[0],roleValue[1]),
-                formData.get("photo").trim(),
-                formData.get("email").trim(),
-                null,
-                formData.get("phone").trim(),
-                []
-            );
+
+            this.staff.name = formData.get("name").trim();
+            this.staff.photo = formData.get("photo").trim();
+            this.staff.email = formData.get("email").trim();
+            this.staff.phone = formData.get("phone").trim();
+            this.staff.role = new Role(roleValue[0],roleValue[1]);
+            this.staff.experiences = [];
+            this.staff.room = null;
+
 
             const companies = formData.getAll("company");
             const roles = formData.getAll("experienceRole");
@@ -118,15 +119,14 @@ export class AddModal {
             const expLength = companies.length;
             for(let i=0;i<expLength;i++)
                 experiences.push(new Experience(
-                    `${i}`,
                     companies[i],
                     roles[i],
                     startDates[i],
                     endDates[i],
                 ))
-            staff.experiences = experiences;
+            this.staff.experiences = experiences;
 
-            callback(staff);
+            callback(this.staff);
             this.#hide();
         })
     }
@@ -146,6 +146,31 @@ export class AddModal {
         } 
 
     }
+
+    #initializeForm(){        
+        const form = document.forms["add-worker-form"];
+    
+        form.name.value = this.staff.name;
+        form.email.value = this.staff.email;
+        form.phone.value = this.staff.name;
+        form.photo.value = this.staff.photo;
+        form.role.selectedIndex = this.staff.role?.id;
+
+        
+
+        const experienceList = form.querySelector("#experienceList");
+
+        let expHtml = ""
+
+        this.staff.experiences.forEach((experience,index) => {            
+            expHtml += `${ExperienceCard(experience,index!==0)}`
+        });
+        if(this.staff.experiences.length === 0) expHtml = ExperienceCard(new Experience("","",0,0),false);
+        
+        experienceList.insertAdjacentHTML("afterend",expHtml);
+        
+    }
+
 
     #validate(input,err,reg){
         if(validate(input.value,reg)) {            
