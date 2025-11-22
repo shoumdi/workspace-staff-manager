@@ -1,6 +1,6 @@
 import { Room } from "../models/Room.mjs";
 import { STORAGE_KEY } from "../utils/Constants.mjs";
-import { isNotEmpty, saveToLocalStorage } from "../utils/Helper.mjs";
+import { isNotEmpty } from "../utils/Helper.mjs";
 
 export class Repository {
     constructor() {
@@ -56,6 +56,7 @@ export class Repository {
         const index = this.data.staffs.findIndex(s=>s.id === id);        
         if (index == -1) return false;
         this.data.staffs.splice(index,1);
+        this.saveDataToLocalStorage();
         return true;
     }
 

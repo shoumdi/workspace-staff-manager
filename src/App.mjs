@@ -38,16 +38,17 @@ document.getElementById("add-worker").addEventListener("click", e => {
     })
 })
 document.getElementById("plan").addEventListener("click", e => {
-    e.stopPropagation();
+    
     if (e.target.closest("button")) {
-
         switch (e.target.closest("button").getAttribute("btnRole")) {
             case "asign-worker":
-                assignerWorker(e.target.closest("div").getAttribute("id"));
+                assignerWorker(e.target.closest(`[zoneId]`).getAttribute("zoneId"));
                 break;
 
             case "retirer":
-                retirerWorker(e.target.closest("article").getAttribute("id"), e.target.closest("article").closest("div").getAttribute("id"))
+                retirerWorker(
+                    e.target.closest("article").getAttribute("id"),
+                    e.target.closest(`[zoneId]`))
                 break;
 
             default:
@@ -55,6 +56,7 @@ document.getElementById("plan").addEventListener("click", e => {
         }
 
     }
+    // e.stopPropagation();
 
 })
 
@@ -98,7 +100,7 @@ function editStaff(id){
 
 
 
-function assignerWorker(id) {
+function assignerWorker(id) {    
     let room = service.getRoomById(id)
     const modal = new AsigningModal(service.getUnassignedStaffs(), room.name);
     modal.show();
@@ -107,12 +109,13 @@ function assignerWorker(id) {
         switch (result) {
             case 0: alert("room is full"); break;
             case 1: {
-
+                const oldView = document.querySelector(`[zoneId="${room.id}"]`);
                 assignTo(
                     document.getElementById("unassignedList"),
-                    document.getElementById(room.id).querySelector("ul"),
+                    oldView.querySelector("ul"),
                     service.getStaffById(staffId))
-                    document.getElementById(room.id).classList.remove("bg-red-500/30");
+                modal.removeView(staffId)
+                oldView.querySelector("div").classList.remove("bg-red-500/30");
             }; break;
             case -1: alert("this room restricted"); break;
         }
@@ -120,17 +123,13 @@ function assignerWorker(id) {
     });
 }
 
-function retirerWorker(id, oldViewId) {
+function retirerWorker(id, oldView) {
     const staff = service.retirerWorker(id);
-
-    const oldView = document.getElementById(oldViewId).querySelector("ul");
-
-    document.getElementById("unassignedList").insertAdjacentHTML("beforeend", `<li>${StaffCard(staff)}</li>`)
-    oldView.removeChild(document.getElementById(id).closest("li"));
-
-    console.log(service.isRoomEmpty(oldViewId));
     
-    if(service.isRoomEmpty(oldViewId)) document.getElementById(oldViewId).classList.add("bg-red-500/30");
+    document.getElementById("unassignedList").insertAdjacentHTML("beforeend", `<li>${StaffCard(staff)}</li>`)
+    oldView.querySelector("ul").removeChild(oldView.querySelector(`[id="${id}"]`).closest("li"));   
+     
+    if(["1","2","3","5"].includes(`${oldView.getAttribute("zoneId")}`) && service.isRoomEmpty(oldView.getAttribute("zoneId"))) oldView.querySelector("div").classList.add("bg-red-500/30");
 
 }
 
@@ -140,15 +139,19 @@ function renderData() {
     renderUnassignedList();
 
 
-    service.getAssignedStaffs().forEach((list, key) => {
+    console.log(service.getAssignedStaffs());
+    
+    service.getAssignedStaffs().forEach((zone) => {
         let html = "";
-        list.forEach(s => {
+        zone.members.forEach(s => {
             html += `<li class="shrink-1 basis[calc(50%-0.5rem)] list-none">${RoomCard(s)}</li>`;
         })
-        const zone = document.getElementById(key);
-        if(list.length> 0) zone.classList.remove("bg-red-500/30");
+        const zoneView = document.querySelector(`[zoneId="${zone.zoneId}"]`);
+        console.log(zoneView);
         
-        zone.querySelector("ul").innerHTML = html;
+        if(zone.members.length> 0 && ["1","2","3","5"].includes(`${zone.zoneId}`)) zoneView.querySelector("div").classList.remove("bg-red-500/30");
+        
+        zoneView.querySelector("ul").innerHTML = html;
 
     })
 

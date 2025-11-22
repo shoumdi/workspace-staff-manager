@@ -8,9 +8,9 @@ export class AsigningModal {
 
     show(){
         const view = `
-            <div id="assign-worker-modal" class ="w-screen h-screen md:p-4 overflow-scroll
-                 bg-black/30 absolute top-0 grid place-items-center">
-                <div class="md:w-[35vw] h-fit p-3 bg-white rounded-lg">
+            <div id="assign-worker-modal" class ="grid place-items-center size-full  
+                 bg-black/60 fixed top-0 overflow-y-scroll md:p-4">
+                <div class="w-[90vw] h-fit p-3 bg-white rounded-lg md:w-[35vw]">
                     <h4 class="font-semibold">Select Worker To Assign <span class="text-neutral-600">(${this.roomName})</spane></h4>
                     <ul id="workers-list" class="my-4 flex flex-col gap-2">
                         ${this.workers.map(w=> `<li>${StaffCard(w)}</li>`).join("")}
@@ -30,4 +30,9 @@ export class AsigningModal {
     }
 
     hide(){ document.body.removeChild(document.getElementById("assign-worker-modal"))}
+
+    removeView(staffId){
+        const workersList = document.getElementById("workers-list");
+        workersList.removeChild(workersList.querySelector(`[staffId="${staffId}"]`).closest("li"));
+    }
 }

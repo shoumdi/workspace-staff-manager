@@ -17,8 +17,8 @@ class Service{
     }
 
     getAssignedStaffs(){
-        const obj = this.repo.getStaffs().filter(s=>s.room!==null).reduce((accu,s)=>{
-            (accu[s.room] ||= []).push(s);
+        const obj = this.repo.getStaffs().filter(s=>s.room!==null).reduce((accu,s,index)=>{
+            (accu[index] ||= {zoneId:s.room,members:[]}).members.push(s);
             return accu;
         },{})
         return Object.values(obj);

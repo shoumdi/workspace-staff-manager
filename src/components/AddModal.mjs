@@ -1,6 +1,5 @@
 import { Experience } from "../models/Experience.mjs";
 import { Role } from "../models/Role.mjs";
-import { Staff } from "../models/Staff.mjs";
 import { COMPANY_ERR, Email_ERR, EMAIL_REG, NAME_ERR, NAME_REG, PHONE_ERR, PHONE_REG, PHOTO_URL_ERR, ROLE_ERR, URL_REG } from "../utils/Constants.mjs";
 import { debounce, isImgUrl, validate } from "../utils/Helper.mjs";
 import { ExperienceCard } from "./ExperienceCard.mjs";
@@ -15,26 +14,26 @@ export class AddModal {
 
     show() {
         const view =  `
-            <div id="add-worker-modal" class ="w-screen h-screen md:p-4 overflow-scroll
-                 bg-black/30 absolute top-0 grid place-items-center">
-                <div class="md:w-[35vw] h-fit p-3 bg-white rounded-lg">
+            <div id="add-worker-modal" class ="grid place-items-center fixed top-0 w-screen h-screen 
+            bg-black/30 overflow-y-scroll p-4">
+                <div class="w-[90vw] h-fit p-3 bg-white rounded-lg md:w-[35vw]">
                     <h4 class="font-semibold">Add new worker</h4>
                     <form id="add-worker-form" class="mt-3 flex flex-col gap-2" action="">
                         <div>
                             <label for"name">Name</label><br>
-                            <input type="text" name="name" placeholder="write a name" class="w-full p-2 border-1 border-neutral-200 rounded-lg">
+                            <input type="text" name="name" placeholder="write a name" class="w-full p-2 border-1 border-neutral-200 rounded-lg" required>
                             <span class="text-sm text-pink-700"></span>
                             </div>
 
                         <div>
                             <label for"email">Email</label><br>
-                            <input type="email" name="email" placeholder="example@domain.com" class="w-full p-2 border-1 border-neutral-200 rounded-lg">
+                            <input type="email" name="email" placeholder="example@domain.com" class="w-full p-2 border-1 border-neutral-200 rounded-lg" required>
                             <span class="text-pink-700"></span>
                         </div>
 
                         <div>
                             <label for"phone">Phone</label><br>
-                            <input type="phone" name="phone" placeholder="06000000" class="w-full p-2 border-1 border-neutral-200 rounded-lg">
+                            <input type="phone" name="phone" placeholder="06000000" class="w-full p-2 border-1 border-neutral-200 rounded-lg" required>
                             <span class="text-pink-700"></span>
                         </div>
 
