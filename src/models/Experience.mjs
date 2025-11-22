@@ -6,3 +6,8 @@ export class Experience {
         this.endDate = endDate
     }
 }
+
+
+export function newExperience(){
+    return new Experience("","",0,0);
+}

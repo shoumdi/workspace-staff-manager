@@ -1,4 +1,4 @@
-import { Experience } from "../models/Experience.mjs";
+import { Experience, newExperience } from "../models/Experience.mjs";
 import { Role } from "../models/Role.mjs";
 import { COMPANY_ERR, Email_ERR, EMAIL_REG, NAME_ERR, NAME_REG, PHONE_ERR, PHONE_REG, PHOTO_URL_ERR, ROLE_ERR, URL_REG } from "../utils/Constants.mjs";
 import { debounce, isImgUrl, validate } from "../utils/Helper.mjs";
@@ -84,7 +84,7 @@ export class AddModal {
         document.forms["add-worker-form"].addEventListener("click",  (e) => {
             switch (e.target.getAttribute("name")) {
                 case "removeExp": document.getElementById("experienceList").removeChild(e.target.closest("div")); break;
-                case "addExp": document.getElementById("experienceList").insertAdjacentHTML("beforeend",ExperienceCard()); break;
+                case "addExp": document.getElementById("experienceList").insertAdjacentHTML("beforeend",ExperienceCard(newExperience())); break;
                 case "annuler": this.#hide(); break;
                 default: break;
             }
@@ -164,10 +164,9 @@ export class AddModal {
         this.staff.experiences.forEach((experience,index) => {            
             expHtml += `${ExperienceCard(experience,index!==0)}`
         });
-        if(this.staff.experiences.length === 0) expHtml = ExperienceCard(new Experience("","",0,0),false);
+        if(this.staff.experiences.length === 0) expHtml = ExperienceCard(newExperience(),false);
         
-        experienceList.insertAdjacentHTML("afterend",expHtml);
-        
+        experienceList.insertAdjacentHTML("beforeend",expHtml);
     }
 
 
