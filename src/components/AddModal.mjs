@@ -15,9 +15,9 @@ export class AddModal {
 
     show() {
         const view =  `
-            <div id="add-worker-modal" class ="w-screen h-screen p-4 overflow-scroll
+            <div id="add-worker-modal" class ="w-screen h-screen md:p-4 overflow-scroll
                  bg-black/30 absolute top-0 grid place-items-center">
-                <div class="w-[35vw] h-fit p-3 bg-white rounded-lg">
+                <div class="md:w-[35vw] h-fit p-3 bg-white rounded-lg">
                     <h4 class="font-semibold">Add new worker</h4>
                     <form id="add-worker-form" class="mt-3 flex flex-col gap-2" action="">
                         <div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,56 +10,81 @@
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body class="h-screen">
-    <main class="h-full bg-neutral-200 md:grid grid-cols-12 overflow-hidden">
-        <aside class="m-3 col-span-3 p-4 bg-neutral-50 rounded-lg overflow-y-scroll">
+
+<body class="size-screen">
+    <main class="h-full bg-neutral-200 md:grid md:grid-cols-12 md:overflow-hidden">
+        <aside class="overflow-y-scroll m-3 p-4 bg-neutral-50 rounded-lg md:col-span-3">
             <h2 class="font-lg font-semibold">Staff Members (Unassigned)</h2>
-            <button id="add-worker" class="w-full mt-4 py-2 px-4 bg-green-500 text-white rounded-lg">Add new worker</button>
-            <ul id="unassignedList" class="mt-4 flex flex-col gap-2"></ul>
+            <button id="add-worker" class="w-full mt-4 py-2 px-4 text-white bg-green-500 rounded-lg">Add new
+                worker</button>
+            <ul id="unassignedList" class="flex flex-col gap-2 mt-4"></ul>
         </aside>
 
 
         <!-- workspace  -->
-        <div id="plan" class="h-full col-span-9 md:bg-[url(../public/assets/images/plan.jpg)] bg-contain bg-no-repeat
-            p-2 size-full md:grid grid-cols-12 grid-rows-12 gap-2
-        ">
+        <div id="plan" class="flex flex-col gap-2 h-screen p-2 
+            md:col-span-9 md:grid md:grid-cols-12 md:grid-rows-12 md:gap-0 md:bg-[url(../public/assets/images/plan.jpg)] 
+            md:bg-contain md:bg-no-repeat">
 
-            <div id="0" class="p-2 md:me-9 col-span-5 row-span-4 bg-red-500/30 flex flex-col justify-center items-center">
+            <div id="0" class="flex flex-col justify-center items-center h-auto aspect-video p-2 bg-[url(../public/assets/images/conference.png)] bg-no-repeat  bg-cover
+                md:col-span-5 md:row-span-4 md:me-9 md:aspect-auto md:bg-none">
+                <ul class="flex flex-wrap gap-2 justify-center items-center size-full"></ul>
+                <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i
+                        class="fa-solid fa-plus"></i></button>
+            </div>
+
+            <div id="1" class="h-auto aspect-square p-2 bg-[url(../public/assets/images/reception.png)] bg-no-repeat bg-cover 
+                md:col-span-5 md:row-start-5 md:row-end-10 md:me-9 md:bg-none">
+                <div class="flex flex-col justify-center items-center gap-2 justify-center items-center size-full bg-red-500/30">
+                    <ul class="size-full"></ul>
+                    <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i
+                            class="fa-solid fa-plus"></i></button>
+                </div>
+
+            </div>
+
+            <div class="col-start-7 row-span-4 flex flex-col col-span-6 md:ms-10 md:flex-row gap-2">
+                <div id="2"
+                    class="w-full h-auto aspect-square p-1 bg-[url(../public/assets/images/servers.png)] bg-cover md:aspect-auto md:bg-none bg-no-repeat">
+                    <div class="flex flex-col justify-center items-center gap-2 justify-center items-center size-full bg-red-500/30">
+                    <ul class="size-full"></ul>
+                    <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i
+                            class="fa-solid fa-plus"></i></button>
+                </div>
+
+                </div>
+                <div id="3"
+                    class="w-full h-auto aspect-square p-1 bg-[url(../public/assets/images/security.png)] md:aspect-auto md:bg-none bg-no-repeat bg-cover">
+                    <div class="flex flex-col justify-center items-center gap-2 justify-center items-center size-full bg-red-500/30">
+                    <ul class="size-full"></ul>
+                    <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i
+                            class="fa-solid fa-plus"></i></button>
+                </div>
+
+                </div>
+            </div>
+
+            <div
+                class="flex flex-col gap-2 md:col-start-7 md:col-span-6 md:row-start-9 md:row-span-4 md:flex-row md:ms-10">
+                <div id="4"
+                    class="flex flex-col justify-center items-center size-full aspect-square bg-[url(../public/assets/images/staff.png)] bg-no-repeat bg-cover md:ms-3 md:bg-none">
                     <ul class="size-full flex flex-wrap gap-2 content-center justify-center items-center"></ul>
-                    <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
+                    <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i
+                            class="fa-solid fa-plus"></i></button>
                 </div>
-                
-                <div id="1" class="md:me-9 col-span-5 row-start-5 row-span-8 bg-red-500/30 flex flex-col justify-center items-center">
-                    <ul class="size-full flex flex-wrap gap-2 content-center justify-center items-center"></ul>
-
-                    <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
-                </div>
-
-                <div class="md:ms-10 col-start-7 col-span-6  row-span-4 flex gap-2">
-                    <div id="2" class="size-full bg-red-500/30 flex flex-col justify-center items-center">
-                        <ul class="size-full flex flex-col md:flex-row flex-wrap gap-2 content-center justify-center items-center"></ul>
-
-                        <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
-                    </div>
-                    <div id="3" class="size-full bg-red-500/30 flex flex-col justify-center items-center">
-                        <ul class="size-full flex flex-col md:flex-row flex-wrap gap-2 content-center justify-center items-center"></ul>
-
-                        <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
-                    </div>
+                <div id="5"
+                    class="size-full aspect-square p-1 bg-[url(../public/assets/images/vault.png)] bg-no-repeat bg-cover md:bg-none">
+                    <div class="flex flex-col justify-center items-center gap-2 justify-center items-center size-full bg-red-500/30">
+                    <ul class="size-full"></ul>
+                    <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i
+                            class="fa-solid fa-plus"></i></button>
                 </div>
 
-                <div class="ms-10 col-start-7 col-span-6  row-start-9 row-span-4 flex gap-2">
-                    <div id="4" class="ms-3 size-full bg-red-500/30 flex flex-col justify-center items-center">
-                        <ul class="size-full flex flex-wrap gap-2 content-center justify-center items-center"></ul>
-                        <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
-                    </div>
-                    <div id="5" class="size-full bg-red-500/30 flex flex-col justify-center items-center">
-                        <ul class="size-full flex flex-wrap gap-2 content-center justify-center items-center"></ul>
-                        <button btnRole="asign-worker" class="py-2 px-4 bg-green-400 rounded-lg"><i class="fa-solid fa-plus"></i></button>
-                    </div>
                 </div>
+            </div>
         </div>
     </main>
     <script src="../src/App.mjs" type="module"></script>
 </body>
+
 </html>
