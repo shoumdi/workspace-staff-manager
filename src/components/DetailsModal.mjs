@@ -9,12 +9,12 @@ export class DetailsModal {
             const view = `
                 <div id="details-modal" class ="w-screen h-screen p-4 overflow-scroll
                      bg-black/30 absolute top-0 grid place-items-center">
-                    <div class="w-[35vw] h-fit p-3 bg-white rounded-lg">
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="p-4 col-span-1 bg-neutral-100 rounded-lg">
+                    <div class="w-[90vw] h-fit p-3 bg-white rounded-lg md:w-[35vw]">
+                        <div class="flex flex-col gap-3  md:grid md:grid-cols-2">
+                            <div class="p-4 bg-neutral-100 rounded-lg md:col-span-1">
                                 <img src = ${this.staff.photo} alt=${this.staff.name} class="size-12 rounded-full"></img>
                                 <h6 class="font-medium">${this.staff.name}</h6>
-                                <p>${this.staff.email}</p>
+                                <p class="wrap-anywhere">${this.staff.email}</p>
                             </div>
 
                             <div class="p-4 col-span-1 bg-neutral-100 rounded-lg">
